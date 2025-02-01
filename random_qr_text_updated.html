@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kärlek & Glädje</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            flex-direction: column;
+            transition: background 1s ease-in-out;
+            background-size: 100% 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            font-size: 5em;
+            color: #ff4d6d;
+            animation: pulseHeart 1.5s infinite ease-in-out;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes pulseHeart {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; text-shadow: 6px 6px 12px rgba(0, 0, 0, 0.6); }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s ease-out;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+        }
+
+        .show {
+            opacity: 1;
+            transform: scale(1);
+            animation: glow 2s infinite alternate, floatText 3s infinite ease-in-out, rotateText 5s infinite linear, pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); }
+            100% { text-shadow: 6px 6px 12px rgba(0, 0, 0, 0.6); }
+        }
+
+        @keyframes floatText {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes particle-fall {
+            0% { transform: translateY(-10vh) scale(0.8); opacity: 1; }
+            100% { transform: translateY(100vh) scale(1.2); opacity: 0; }
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-fall linear infinite;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="particle-container"></div>
+    <div class="heart">❤</div>
+    <h1 id="loveText">Laddar kärlek...</h1>
+    <p class="copyright">© JonanART</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var texts = [
+                "Din kram är min favoritplats.",
+                "Du är som WiFi, jag tappar bort mig utan dig!",
+                "Du + Jag = Perfektion",
+                "Tiden stannar när jag ser dig.",
+                "Du gör min värld färgglad.",
+                "Livet med dig är ett äventyr!",
+                "Ditt skratt är min favoritmelodi.",
+                "Om kärlek var en sport, skulle vi vara mästare!",
+                "Du är mitt solsken på regniga dagar.",
+                "Jag behöver ingen karta, mitt hjärta leder mig till dig."
+            ];
+
+            var backgrounds = [
+                "linear-gradient(to right, #1a237e, #4a90e2)", // Natt
+                "linear-gradient(to right, #ffcc80, #ffeb3b)", // Soluppgång
+                "linear-gradient(to right, #4A90E2, #87CEFA)", // Dag
+                "linear-gradient(to right, #ff7043, #ffcc80)", // Solnedgång
+                "linear-gradient(to right, #ff5722, #795548)", // Höst
+                "linear-gradient(to right, #388e3c, #8bc34a)", // Vår
+                "linear-gradient(to right, #0d47a1, #42a5f5)", // Vinter
+                "linear-gradient(to right, #ff1744, #ff80ab)"  // Kärlekstema
+            ];
+
+            var randomIndex = Math.floor(Math.random() * texts.length);
+            var loveTextElement = document.getElementById('loveText');
+            loveTextElement.textContent = texts[randomIndex];
+            
+            var randomBgIndex = Math.floor(Math.random() * backgrounds.length);
+            document.body.style.background = backgrounds[randomBgIndex];
+
+            setTimeout(() => {
+                loveTextElement.classList.add('show');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
